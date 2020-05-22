@@ -1287,9 +1287,12 @@ start_sync:
                 goto start_sync;
             } else if (((ast->prefix_count < 5 || sync + 9 > i) &&
                         d[2] < 128 && d[3] < 128) ||
-                       d[2] * 256 + d[3] == ast->prefix /* ||
+                       d[2] * 256 + d[3] == ast->prefix ||
+                       (d[2] * 256 + d[3] == ast->prefix-1 && d[2] == 'd' && d[3] == 'b') 
+                       /* ||
                        (d[2] == 'd' && d[3] == 'c') ||
                        (d[2] == 'w' && d[3] == 'b') */) {
+
                 if (exit_early)
                     return 0;
                 if (d[2] * 256 + d[3] == ast->prefix)
